@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Control de Robot con Joystick Virtual</title>
+  <script src="https://cdn.jsdelivr.net/npm/roslib/build/roslib.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/nipplejs/dist/nipplejs.min.js"></script>
+  <script src="scripts.js" defer></script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="menu">
+    <h2>Opciones</h2>
+    <button id="manualBtn">Modo Manual</button>
+    <button id="automaticoBtn">Modo Automático</button>
+    <button id="configuracionBtn">Configuración</button> 
+  </div>
+  
+
+  <div id="joystick"></div>
+  
+  <div id="velocidades">
+    <div class="velocidad-item">
+      <label>Velocidad Lineal: </label>
+      <span><span id="vel_lineal">0.0</span> m/s</span>
+    </div>
+    <div class="velocidad-item">
+      <label>Velocidad Angular: </label>
+      <span><span id="vel_angular">0.0</span> rad/s</span>
+    </div>
+  </div>
+
+  <div id="camera-view">
+    <h2>Vista de la Cámara</h2>
+    <img src="http://0.0.0.0:8080/stream?topic=/camera/image_raw" alt="Stream de ROS" style="width: 640px; height: 480px;">
+  </div>
+
+
+  <!-- Modal de Configuración -->
+  <div id="configModal" class="modal">
+    <div class="modal-content">
+      <span id="closeModal" class="close">&times;</span>
+      <h2>Configuración</h2>
+      <form id="configForm">
+        <label for="maxVelLineal">Velocidad Lineal Máxima (m/s):</label>
+        <input type="number" id="maxVelLineal" name="maxVelLineal" step="0.1" min="0" value="1.0">
+
+        <label for="maxVelAngular">Velocidad Angular Máxima (rad/s):</label>
+        <input type="number" id="maxVelAngular" name="maxVelAngular" step="0.1" min="0" value="1.0">
+
+        <button type="button" id="saveConfigBtn">Guardar</button>
+        <button id="closeConfigBtn">Salir</button> <!-- Asegúrate de que este botón exista -->
+      </form>
+    </div>
+  </div>
+  
+  <div id="robotStatus" class="status-indicator">
+    <span id="statusCircle" class="circle"></span>
+    <span id="statusText">Disconnected</span>
+  </div>
+  
+  
+
+</body>
+</html>
