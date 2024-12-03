@@ -129,6 +129,8 @@
     console.log('Robot detenido');
   });
   
+
+  
   // Abrir el modal al presionar "Configuración"
   configuracionBtn.addEventListener('click', () => {
     configModal.style.display = 'flex';
@@ -155,6 +157,50 @@
       const configModal = document.getElementById('configModal');
       configModal.style.display = 'none'; // Oculta el modal
   });
+
+
+
+
+  // Función para consultar el estado del robot
+  async function fetchRobotStatus() {
+    try {
+        const response = await fetch('http://localhost:5000/robot_status');
+        if (response.ok) {
+            const data = await response.json();
+            updateStatusIndicator(data.status);
+        } else {
+            console.error('Error al consultar el estado del robot');
+            updateStatusIndicator('Disconnected'); // Asume desconexión si falla la consulta
+        }
+    } catch (error) {
+        console.error('Error en la solicitud de estado del robot:', error);
+        updateStatusIndicator('Disconnected'); // Asume desconexión si ocurre un error
+    }
+  }
+
+  // Llama a la función periódicamente
+  setInterval(fetchRobotStatus, 2000); // Consulta cada 2 segundos
+
+  // Función para actualizar el indicador de estado
+  function updateStatusIndicator(status) {
+    const statusCircle = document.getElementById('statusCircle');
+    const statusText = document.getElementById('statusText');
+
+    if (status === 'Connected') {
+        statusCircle.classList.remove('disconnected');
+        statusCircle.classList.add('connected');
+        statusText.textContent = 'Connected';
+    } else {
+        statusCircle.classList.remove('connected');
+        statusCircle.classList.add('disconnected');
+        statusText.textContent = 'Disconnected';
+    }
+  }
+
+
+
+
+
 
 
   // ************************************** SERVER CONNECTION **************************************

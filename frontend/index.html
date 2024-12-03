@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Control de Robot con Joystick Virtual</title>
+  <title>Robot Manager</title>
   <script src="https://cdn.jsdelivr.net/npm/roslib/build/roslib.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/nipplejs/dist/nipplejs.min.js"></script>
   <script src="scripts.js" defer></script>
@@ -11,7 +11,7 @@
 </head>
 <body>
   <div id="menu">
-    <h2>Opciones</h2>
+    <h2>Menu</h2>
     <button id="manualBtn">Modo Manual</button>
     <button id="automaticoBtn">Modo Automático</button>
     <button id="configuracionBtn">Configuración</button> 
@@ -56,10 +56,10 @@
   </div>
   
   <div id="robotStatus" class="status-indicator">
-    <span id="statusCircle" class="circle"></span>
+    <span id="statusCircle" class="circle disconnected"></span>
     <span id="statusText">Disconnected</span>
-  </div>
-  
+</div>
+
   
 
 </body>
